@@ -1,0 +1,6 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\David\\Desktop\\Paseos_felices_v5-main\\servicios\\storage-service']
+INFO:     Uvicorn running on http://0.0.0.0:3011 (Press CTRL+C to quit)
+INFO:     Started reloader process [13052] using WatchFiles
+INFO:     Started server process [13232]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

@@ -1,0 +1,373 @@
+/* ============================================
+   GROOMER DASHBOARD — Estilo basado en ClientPanel
+   (Cards + modo oscuro + jerarquía + consistencia)
+   ============================================ */
+
+/* Layout root */
+.groomer-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 100%;
+}
+
+/* Welcome */
+.groomer-dashboard .welcome-section {
+  padding: 28px 30px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 24px;
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.groomer-dashboard .welcome-section h1 {
+  font-size: 42px;
+  font-weight: 900;
+  margin: 0 0 10px;
+  letter-spacing: -1px;
+}
+
+.groomer-dashboard .welcome-section p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* ======= Stats tables grid (4 cards) ======= */
+.stats-tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.groomer-content .stat-table {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color);
+
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  padding: 22px 22px 18px;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-table::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stat-table:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-hover);
+}
+
+.stat-table:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-table-header {
+  margin-bottom: 14px;
+}
+
+.stat-table-header h3 {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 0;
+  color: var(--primary);
+  letter-spacing: -0.3px;
+}
+
+/* Mini table */
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+.mini-table thead {
+  background: linear-gradient(135deg, rgba(217, 108, 95, 0.10) 0%, rgba(232, 144, 127, 0.04) 100%);
+}
+
+.mini-table th {
+  text-align: left;
+  padding: 12px 12px;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-subtle, #f0f0f0);
+  white-space: nowrap;
+}
+
+.mini-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--border-subtle, #f0f0f0);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.mini-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.mini-table tbody tr:hover td {
+  background: var(--bg-hover, #f8f9fa);
+  color: var(--text-primary);
+}
+
+/* ======= Quick actions ======= */
+.quick-actions {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 26px 26px;
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-actions h3 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 900;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  user-select: none;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.action-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.action-primary:hover {
+  filter: brightness(1.05);
+}
+
+.action-secondary {
+  background: var(--bg-hover, #f8f9fa);
+  color: var(--primary);
+}
+
+.action-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.action-info {
+  background: rgba(217, 108, 95, 0.08);
+  color: var(--primary);
+}
+
+.action-info:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.action-warning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b4533a;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.action-warning:hover {
+  background: #f59e0b;
+  color: #1b1b1b;
+}
+
+/* ======= Dark mode ======= */
+.dark .groomer-dashboard .welcome-section {
+  background: linear-gradient(135deg, rgba(217, 108, 95, 0.95) 0%, rgba(180, 83, 58, 0.95) 100%);
+}
+
+.dark .stat-table,
+.dark .quick-actions {
+  background: var(--bg-card, #1a1a1a);
+  border-color: var(--border-color, #2a2a2a);
+}
+
+.dark .stat-table-header h3 {
+  color: var(--primary-light, #e8907f);
+}
+
+.dark .mini-table th {
+  color: var(--text-primary, #f8fafc);
+  border-bottom-color: var(--border-subtle, #1f1f1f);
+}
+
+.dark .mini-table td {
+  border-bottom-color: var(--border-subtle, #1f1f1f);
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.dark .mini-table tbody tr:hover td {
+  background: var(--bg-hover, #252525);
+  color: var(--text-primary, #f8fafc);
+}
+
+.dark .action-btn {
+  background: var(--bg-card, #1a1a1a);
+  border-color: var(--border-color, #2a2a2a);
+  color: var(--text-primary, #f8fafc);
+}
+
+.dark .action-secondary,
+.dark .action-info {
+  background: rgba(217, 108, 95, 0.08);
+}
+
+.dark .action-secondary:hover,
+.dark .action-info:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .groomer-dashboard .welcome-section {
+    padding: 22px 20px;
+  }
+
+  .groomer-dashboard .welcome-section h1 {
+    font-size: 32px;
+  }
+
+  .stats-tables-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   CHARTS SECTION - Gráficos en Dashboard Groomer
+   ============================================ */
+
+/* ============================================
+   CHART COLORS - Variables de raíz (para modo oscuro y claro)
+   Solución centralizada: cambiar aquí afecta a todos los gráficos futuros
+   ============================================ */
+.groomer-dashboard {
+  --chart-primary: #d96c5f;
+  --chart-primary-light: #e8907f;
+  --chart-success: #22c55e;
+  --chart-warning: #f59e0b;
+  --chart-purple: #8b5cf6;
+  --chart-teal: #14b8a6;
+  --chart-line-bg: rgba(217, 108, 95, 0.12);
+  --chart-grid: rgba(0, 0, 0, 0.08);
+  --chart-text: var(--text-primary, #1a1a1a);
+}
+
+.dark .groomer-dashboard {
+  --chart-primary: #d96c5f;
+  --chart-primary-light: #e8907f;
+  --chart-success: #4ade80;
+  --chart-warning: #fbbf24;
+  --chart-purple: #a78bfa;
+  --chart-teal: #2dd4bf;
+  --chart-line-bg: rgba(217, 108, 95, 0.18);
+  --chart-grid: rgba(255, 255, 255, 0.1);
+  --chart-text: #e5e7eb;
+}
+
+.charts-section {
+  margin-top: 8px;
+}
+
+.charts-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  background: var(--bg-card, #fff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chart-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+/* Contenedor del gráfico para que respete el flex */
+.chart-wrapper {
+  flex: 1;
+  min-height: 0; /* clave para que funcione flex + canvas */
+  position: relative;
+}
+
+/* Dark mode para las cards de gráficos */
+.dark .chart-card {
+  background: var(--bg-card, #111);
+  border-color: var(--border-color, #333);
+}
+
+.dark .chart-card h3 {
+  color: var(--text-primary, #f3f4f6);
+}
+
+/* Responsive for charts */
+@media (max-width: 768px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-card {
+    height: 280px;
+  }
+}
+

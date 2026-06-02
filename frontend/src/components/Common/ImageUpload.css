@@ -1,0 +1,129 @@
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Preview sizes */
+.preview-small {
+  width: 80px;
+  height: 80px;
+}
+
+.preview-medium {
+  width: 130px;
+  height: 130px;
+}
+
+.preview-large {
+  width: 200px;
+  height: 200px;
+}
+
+/* Preview shapes */
+.preview-circular {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.preview-square {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-upload-preview {
+  position: relative;
+  border: 3px solid var(--border-color, #ddd);
+  background: var(--bg-subtle, #f8f9fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-upload-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: 2px solid white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+
+.image-upload-remove:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 1);
+  transform: scale(1.1);
+}
+
+.image-upload-remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.image-upload-placeholder {
+  border: 3px dashed var(--border-color, #ddd);
+  background: var(--bg-subtle, #f8f9fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-icon {
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.image-upload-button {
+  padding: 8px 16px;
+  background: var(--primary, #d96c5f);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-align: center;
+  display: inline-block;
+}
+
+.image-upload-button:hover:not(:disabled) {
+  background: var(--primary-dark, #c45a4d);
+  transform: translateY(-1px);
+}
+
+.image-upload-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.image-upload-error {
+  color: #ef4444;
+  font-size: 12px;
+  text-align: center;
+}

@@ -1,0 +1,340 @@
+/* ============================================
+   STAT CARD — Componente de estadísticas
+   ============================================ */
+
+/* 1) BASE */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card-bg, #ffffff);
+  border-radius: 20px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.08));
+  transition: var(--transition-smooth, all 0.35s cubic-bezier(0.23, 1, 0.32, 1));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Barra superior (acento) */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: left;
+}
+
+/* 2) ELEMENTOS */
+.stat-card .stat-icon {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.stat-card .stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-card .stat-label {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.stat-card .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 4px 0 0 0;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.stat-card .stat-trend {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 3) ESTADOS */
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card:focus-visible {
+  outline: 2px solid var(--primary, #d96c5f);
+  outline-offset: 2px;
+}
+
+/* Tendencias */
+.stat-trend.trend-up {
+  color: var(--success, #22c55e);
+}
+
+.stat-trend.trend-down {
+  color: var(--danger, #ef4444);
+}
+
+/* 4) VARIANTES (clase aplicada desde StatCard.jsx: stat-card-${color}) */
+.stat-card-primary {
+  border-left-color: var(--primary, #d96c5f);
+}
+
+.stat-card-success {
+  border-left-color: var(--success, #22c55e);
+}
+
+.stat-card-warning {
+  border-left-color: var(--warning, #f59e0b);
+}
+
+.stat-card-info {
+  border-left-color: var(--primary-light, #e8907f);
+}
+
+.stat-card-secondary {
+  border-left-color: var(--primary-dark, #c55a4d);
+}
+
+/* Fondos sutiles para el icono */
+.stat-card-primary .stat-icon {
+  background: linear-gradient(135deg, rgba(217, 108, 95, 0.14) 0%, rgba(217, 108, 95, 0.06) 100%);
+}
+
+.stat-card-primary {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #d96c5f;
+  box-shadow: 0 4px 20px rgba(217, 108, 95, 0.15);
+}
+
+.stat-card-success .stat-icon {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%);
+}
+
+.stat-card-success {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #22c55e;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15);
+}
+
+.stat-card-warning .stat-icon {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(217, 119, 6, 0.08) 100%);
+}
+
+.stat-card-warning {
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  border-color: #eab308;
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.15);
+}
+
+.stat-card-info .stat-icon {
+  background: linear-gradient(135deg, rgba(217, 108, 95, 0.10) 0%, rgba(180, 83, 58, 0.08) 100%);
+}
+
+.stat-card-info {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+}
+
+.stat-card-secondary .stat-icon {
+  background: linear-gradient(135deg, rgba(180, 83, 58, 0.12) 0%, rgba(159, 63, 42, 0.08) 100%);
+}
+
+.stat-card-secondary {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+}
+
+/* Dark mode para las variantes con gradientes */
+.dark .stat-card-primary {
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+  border-color: #d96c5f;
+  box-shadow: 0 4px 20px rgba(217, 108, 95, 0.25);
+}
+
+.dark .stat-card-success {
+  background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+  border-color: #22c55e;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.25);
+}
+
+.dark .stat-card-warning {
+  background: linear-gradient(135deg, #713f12 0%, #854d0e 100%);
+  border-color: #eab308;
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.25);
+}
+
+.dark .stat-card-info {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+}
+
+.dark .stat-card-secondary {
+  background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+}
+
+.dark .stat-card-primary .stat-value,
+.dark .stat-card-success .stat-value,
+.dark .stat-card-warning .stat-value,
+.dark .stat-card-info .stat-value,
+.dark .stat-card-secondary .stat-value {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 5) MODO OSCURO */
+/* Dark mode now inherited from global ClientPanel.css to avoid blue (#1f2937) conflicts */
+
+.dark .stat-card:hover {
+  border-color: var(--primary-light, #e8907f);
+}
+
+/* 6) RESPONSIVE */
+@media (max-width: 768px) {
+  .stat-card {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .stat-card .stat-icon {
+    font-size: 28px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .stat-card .stat-value {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .stat-card .stat-icon {
+    font-size: 22px;
+    min-width: 38px;
+    min-height: 38px;
+  }
+
+  .stat-card .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-card .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.3px;
+  }
+
+  .stat-card .stat-trend {
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   Soporte para secciones legacy renombradas
+   (GroomerPets.jsx, GroomerStatistics.jsx)
+   ============================================ */
+.pets-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.pets-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.06));
+}
+
+.pets-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.1));
+  border-color: var(--primary, #d96c5f);
+}
+
+.pets-stat-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.pets-stat-label {
+  color: var(--text-secondary, #666);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pets-stat-value {
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 800;
+  font-size: 24px;
+  margin-left: auto;
+  line-height: 1;
+}
+
+.dark .pets-stat {
+  background: var(--card-bg, #1a1a1a);
+  border-color: var(--border-color, #2a2a2a);
+}
+
+.dark .pets-stat-label {
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.dark .pets-stat-value {
+  color: var(--text-primary, #f8fafc);
+}
+
+.client-stat-label {
+  color: var(--text-secondary, #666);
+  font-size: 13px;
+}
+
+.client-stat-value {
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 700;
+  margin-left: 8px;
+}
+

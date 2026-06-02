@@ -1,0 +1,66 @@
+/* ============================================
+   NAV TOGGLE - Componente reutilizable
+   Estilos y animaciones ligados al componente
+   ============================================ */
+
+/* Alta especificidad para que gane sobre ClientPanel.css */
+.client-header .nav-toggle,
+.groomer-topbar .nav-toggle,
+.nav-toggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: scale(1);
+}
+
+.client-header .nav-toggle:hover,
+.groomer-topbar .nav-toggle:hover,
+.nav-toggle:hover {
+  color: var(--primary);
+  transform: scale(1.15);
+}
+
+.client-header .nav-toggle:active,
+.groomer-topbar .nav-toggle:active,
+.nav-toggle:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+/* Rotación cuando el sidebar está abierto */
+.client-header .nav-toggle.open,
+.groomer-topbar .nav-toggle.open,
+.nav-toggle.open {
+  color: var(--primary);
+  transform: rotate(90deg) scale(1.05);
+}
+
+.client-header .nav-toggle.open:hover,
+.groomer-topbar .nav-toggle.open:hover,
+.nav-toggle.open:hover {
+  transform: rotate(90deg) scale(1.15);
+}
+
+/* Variante con fondo (opcional) */
+.nav-toggle.filled {
+  background: var(--bg-subtle);
+  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.nav-toggle.filled:hover {
+  background: var(--primary);
+  color: #fff;
+}

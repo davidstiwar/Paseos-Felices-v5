@@ -1,0 +1,91 @@
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.services-table thead {
+  background: var(--bg-sidebar);
+  color: var(--text-primary);
+}
+
+.services-table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.services-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+}
+
+.services-table tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+.services-table td {
+  padding: 12px 15px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.services-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-pendiente_confirmar {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-confirmado {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-en_ejecucion {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status-terminado {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-cancelado {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.btn-action {
+  padding: 4px 8px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  background-color: transparent;
+  color: var(--primary);
+  transition: color 0.2s, background-color 0.2s;
+  font-weight: 500;
+}
+
+.btn-action:hover {
+  background-color: var(--primary);
+  color: white;
+}

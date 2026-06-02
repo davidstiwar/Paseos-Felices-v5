@@ -1,0 +1,230 @@
+/* ============================================
+   PET CARD — Premium UI/UX (Groomer & Client)
+   - UI: Imagen + info + CTA fuerte, misma familia que Stat/Service/Notification
+   - UX: Hover con zoom + elevación, botón con micro-feedback, accesible, responsive
+   ============================================ */
+
+/* 1. BASE — Estructura principal (mismo estilo premium .card del dashboard cliente) */
+.pet-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: var(--transition-smooth, all 0.35s cubic-bezier(0.23, 1, 0.32, 1));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+/* Barra de acento superior igual que las cards del cliente */
+.pet-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  transform-origin: left;
+}
+
+/* 2. ELEMENTOS */
+.pet-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  position: relative;
+}
+
+.pet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth, 0.35s cubic-bezier(0.23, 1, 0.32, 1));
+}
+
+.pet-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--text-tertiary, #999);
+}
+
+.pet-info {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pet-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0 0 2px 0;
+  line-height: 1.2;
+}
+
+.pet-breed {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  margin: 0 0 10px 0;
+}
+
+.pet-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.pet-card .stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.pet-card .stat-label {
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.pet-card .stat-value {
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 700;
+}
+
+/* Botón de acción principal (CTA) */
+.pet-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--primary, #d96c5f) 0%, var(--primary-dark, #c55a4d) 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  margin-top: auto;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.3px;
+}
+
+/* 3. ESTADOS INTERACTIVOS (UX delight + accesibilidad - igual a .card) */
+.pet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.pet-card:hover::before {
+  transform: scaleX(1);
+}
+
+.pet-card:hover .pet-image {
+  transform: scale(1.06);
+}
+
+.pet-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover, 0 15px 40px rgba(217, 108, 95, 0.15));
+  filter: brightness(1.05);
+}
+
+.pet-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.06));
+}
+
+.pet-btn:focus-visible {
+  outline: 3px solid var(--primary-light, #e8907f);
+  outline-offset: 3px;
+}
+
+/* 4. MODO OSCURO */
+.dark .pet-card {
+  background: var(--bg-card, #1a1a1a);
+  border-color: var(--border-color, #2a2a2a);
+}
+
+.dark .pet-name {
+  color: var(--text-primary, #f8fafc);
+}
+
+.dark .pet-breed {
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.dark .pet-card .stat-label {
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.dark .pet-card .stat-value {
+  color: var(--text-primary, #f8fafc);
+}
+
+.dark .pet-image-container {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+}
+
+.dark .pet-card:hover {
+  border-color: var(--primary-light, #e8907f);
+}
+
+/* Override específico para "Mascotas Atendidas" del groomer (queremos negro profundo) */
+.groomer-pets .pet-card,
+.dark .groomer-pets .pet-card {
+  background: #111;
+  border-color: #333;
+}
+
+.groomer-pets .dark .pet-image-container,
+.dark .groomer-pets .pet-image-container {
+  background: linear-gradient(135deg, #222 0%, #333 100%);
+}
+
+/* 5. RESPONSIVE */
+@media (max-width: 768px) {
+  .pet-card {
+    border-radius: 10px;
+  }
+  .pet-name {
+    font-size: 15px;
+  }
+  .pet-info {
+    padding: 10px;
+  }
+  .pet-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-name {
+    font-size: 14px;
+  }
+  .pet-breed {
+    font-size: 11px;
+  }
+  .pet-card .stat {
+    font-size: 11px;
+  }
+  .pet-btn {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  .pet-info {
+    padding: 9px;
+  }
+}
