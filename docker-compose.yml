@@ -1,0 +1,243 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: paseos-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: paseos_auth
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./servicios/mysql-setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    networks:
+      - paseos-network
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./servicios/auth-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-auth-service
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_auth
+      PORT: 8000
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Services Catalog Service
+  services-catalog-service:
+    build:
+      context: ./servicios/services-catalog-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-services-catalog
+    ports:
+      - "3014:3014"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_services_catalog
+      PORT: 3014
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Appointments Service
+  appointments-service:
+    build:
+      context: ./servicios/appointments-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-appointments
+    ports:
+      - "3023:3023"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_appointments
+      PORT: 3023
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Reviews Service
+  reviews-service:
+    build:
+      context: ./servicios/reviews-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-reviews
+    ports:
+      - "3007:3007"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_reviews
+      PORT: 3007
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Pets Service
+  pets-service:
+    build:
+      context: ./servicios/pets-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-pets
+    ports:
+      - "3022:3022"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_pets
+      PORT: 3022
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Groomer Service
+  groomer-service:
+    build:
+      context: ./servicios/groomer-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-groomer
+    ports:
+      - "3010:3010"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_groomer
+      PORT: 3010
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # User Profile Service
+  user-profile-service:
+    build:
+      context: ./servicios/user-profile-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-user-profile
+    ports:
+      - "3015:3015"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_user_profile
+      PORT: 3015
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Notifications Service
+  notifications-service:
+    build:
+      context: ./servicios/notifications-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-notifications
+    ports:
+      - "3016:3016"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_notifications
+      PORT: 3016
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Storage Service
+  storage-service:
+    build:
+      context: ./servicios/storage-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-storage
+    ports:
+      - "3017:3017"
+    environment:
+      PORT: 3017
+      FRONTEND_URL: http://localhost:3000
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Email Service
+  email-service:
+    build:
+      context: ./servicios/email-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-email
+    ports:
+      - "3018:3018"
+    environment:
+      PORT: 3018
+      FRONTEND_URL: http://localhost:3000
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Search Service
+  search-service:
+    build:
+      context: ./servicios/search-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-search
+    ports:
+      - "3019:3019"
+    environment:
+      PORT: 3019
+      FRONTEND_URL: http://localhost:3000
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+  # Reporting Service
+  reporting-service:
+    build:
+      context: ./servicios/reporting-service
+      dockerfile: ../../servicios/Dockerfile
+    container_name: paseos-reporting
+    ports:
+      - "3020:3020"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/paseos_reporting
+      PORT: 3020
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mysql
+    networks:
+      - paseos-network
+    volumes:
+      - ./servicios:/app/servicios
+
+networks:
+  paseos-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
