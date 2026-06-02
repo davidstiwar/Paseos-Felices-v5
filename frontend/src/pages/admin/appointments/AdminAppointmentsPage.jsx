@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { getAllAppointments, createAppointment, updateAppointment, cancelAppointment } from '../../../api/appointments';
 import { getAllUsers } from '../../../api/auth';
 import { getAllPets } from '../../../api/pets';
@@ -34,7 +34,7 @@ const AdminAppointmentsPage = () => {
     return statusMap[status?.toLowerCase()] || (status || 'Pendiente');
   };
 
-  const loadAppointments = async () => {
+  const loadAppointments = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -60,7 +60,7 @@ const AdminAppointmentsPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadAppointments();
