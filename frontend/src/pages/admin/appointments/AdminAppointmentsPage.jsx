@@ -64,7 +64,7 @@ const AdminAppointmentsPage = () => {
 
   useEffect(() => {
     loadAppointments();
-  }, []);
+  }, [loadAppointments]);
 
   const loadClients = async () => {
     try {

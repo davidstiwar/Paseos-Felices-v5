@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { getGoogleOAuthUrl, googleOAuthCallback } from '../../api/auth';
-import { useNavigate } from 'react-router-dom';
-import { tokenStore } from '../../api/tokenStore';
+import { getGoogleOAuthUrl } from '../../api/auth';
 
 export default function OAuthButtons({ onSuccess }) {
   const [loading, setLoading] = useState(null);
-  const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
     try {
