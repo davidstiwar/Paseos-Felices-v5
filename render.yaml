@@ -1,0 +1,204 @@
+services:
+  # Auth Service
+  - type: web
+    name: paseos-auth-service
+    env: python
+    plan: free
+    buildCommand: cd servicios/auth-service && pip install -r requirements.txt
+    startCommand: cd servicios/auth-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: SECRET_KEY
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 10080
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: false
+
+  # Services Catalog Service
+  - type: web
+    name: paseos-services-catalog
+    env: python
+    plan: free
+    buildCommand: cd servicios/services-catalog-service && pip install -r requirements.txt
+    startCommand: cd servicios/services-catalog-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3014
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Appointments Service
+  - type: web
+    name: paseos-appointments
+    env: python
+    plan: free
+    buildCommand: cd servicios/appointments-service && pip install -r requirements.txt
+    startCommand: cd servicios/appointments-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3023
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Reviews Service
+  - type: web
+    name: paseos-reviews
+    env: python
+    plan: free
+    buildCommand: cd servicios/reviews-service && pip install -r requirements.txt
+    startCommand: cd servicios/reviews-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3007
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Pets Service
+  - type: web
+    name: paseos-pets
+    env: python
+    plan: free
+    buildCommand: cd servicios/pets-service && pip install -r requirements.txt
+    startCommand: cd servicios/pets-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3022
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Groomer Service
+  - type: web
+    name: paseos-groomer
+    env: python
+    plan: free
+    buildCommand: cd servicios/groomer-service && pip install -r requirements.txt
+    startCommand: cd servicios/groomer-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3010
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # User Profile Service
+  - type: web
+    name: paseos-user-profile
+    env: python
+    plan: free
+    buildCommand: cd servicios/user-profile-service && pip install -r requirements.txt
+    startCommand: cd servicios/user-profile-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3015
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Notifications Service
+  - type: web
+    name: paseos-notifications
+    env: python
+    plan: free
+    buildCommand: cd servicios/notifications-service && pip install -r requirements.txt
+    startCommand: cd servicios/notifications-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3016
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Storage Service
+  - type: web
+    name: paseos-storage
+    env: python
+    plan: free
+    buildCommand: cd servicios/storage-service && pip install -r requirements.txt
+    startCommand: cd servicios/storage-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3017
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Email Service
+  - type: web
+    name: paseos-email
+    env: python
+    plan: free
+    buildCommand: cd servicios/email-service && pip install -r requirements.txt
+    startCommand: cd servicios/email-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3018
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Search Service
+  - type: web
+    name: paseos-search
+    env: python
+    plan: free
+    buildCommand: cd servicios/search-service && pip install -r requirements.txt
+    startCommand: cd servicios/search-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3019
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
+
+  # Reporting Service
+  - type: web
+    name: paseos-reporting
+    env: python
+    plan: free
+    buildCommand: cd servicios/reporting-service && pip install -r requirements.txt
+    startCommand: cd servicios/reporting-service && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 3020
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        value: https://paseos-felices-v5.vercel.app
+      - key: ENVIRONMENT
+        value: production
