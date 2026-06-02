@@ -7,6 +7,43 @@ Este proyecto utiliza una arquitectura de microservicios:
 - **Backend:** FastAPI con múltiples microservicios (se despliegan en Railway/Render)
 - **Base de datos:** MySQL (se despliega en Railway/PlanetScale)
 
+## Opciones Gratuitas de Despliegue
+
+### Opción Recomendada: Railway.app (Todo en uno)
+
+**Ventajas:**
+- $5 USD de crédito gratis al registrarte
+- Soporta Python/FastAPI
+- Soporta MySQL nativo
+- Todo en una plataforma
+- Fácil de configurar
+
+**Limitaciones:**
+- Después de los $5 gratis, es de pago
+- Límites de recursos en el plan gratuito
+
+### Opción Alternativa: Render.com + PlanetScale
+
+**Ventajas:**
+- Render: Plan gratuito para servicios web
+- PlanetScale: Plan gratuito para MySQL serverless
+- Escalable
+
+**Limitaciones:**
+- Render tiene límites de inactividad (30 min)
+- PlanetScale tiene límites de filas/lecturas en plan gratuito
+
+### Opción Alternativa: Fly.io + PlanetScale
+
+**Ventajas:**
+- Fly.io: Plan gratuito para servicios
+- PlanetScale: Plan gratuito para MySQL serverless
+- Buena performance
+
+**Limitaciones:**
+- Configuración más compleja
+- Requiere Docker
+
 ## 1. Despliegue del Frontend en Vercel
 
 ### Pasos:
