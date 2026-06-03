@@ -11,6 +11,9 @@ def get_database_setup(database_url: str):
     Esta función centraliza la lógica de configuración de SQLAlchemy.
     """
     print(f"Setting up database with URL: {database_url}")
+    # Reemplazar mysql:// con mysql+pymysql:// para Railway
+    if database_url.startswith("mysql://"):
+        database_url = database_url.replace("mysql://", "mysql+pymysql://", 1)
     # Optimizado para desarrollo con múltiples microservicios
     # QueuePool mantiene conexiones reutilizables para mejorar rendimiento
     engine = create_engine(
