@@ -37,7 +37,7 @@ app.add_middleware(
 )
 
 # Prometheus metrics
-setup_metrics(app)
+# setup_metrics(app)  # Commented out - requires prometheus_fastapi_instrumentator
 
 # Manejador para errores de validación de Pydantic
 @app.exception_handler(RequestValidationError)
