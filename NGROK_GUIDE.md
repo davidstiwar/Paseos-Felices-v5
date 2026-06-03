@@ -23,7 +23,7 @@ Si tienes XAMPP instalado:
 3. Crea la base de datos `paseos_auth`
 4. Ejecuta el script SQL:
 ```powershell
-mysql -u root paseos_auth < servicios/mysql-setup.sql
+Get-Content servicios/mysql-setup.sql | mysql -u root paseos_auth
 ```
 
 **Opción B: MySQL Local**
@@ -33,13 +33,13 @@ CREATE DATABASE paseos_auth;
 ```
 Luego ejecuta el script SQL:
 ```powershell
-mysql -u root -p paseos_auth < servicios/mysql-setup.sql
+Get-Content servicios/mysql-setup.sql | mysql -u root -p paseos_auth
 ```
 
 **Opción C: MySQL con Docker**
 ```powershell
 docker run -d --name paseos-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=paseos_auth -p 3306:3306 mysql:8.0
-docker exec -i paseos-mysql mysql -uroot -proot paseos_auth < servicios/mysql-setup.sql
+Get-Content servicios/mysql-setup.sql | docker exec -i paseos-mysql mysql -uroot -proot paseos_auth
 ```
 
 ### 2. Iniciar Servicios
