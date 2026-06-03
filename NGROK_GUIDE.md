@@ -16,7 +16,17 @@ ngrok es una herramienta que expone servicios locales a internet a través de t�
 
 ### 1. Configurar MySQL
 
-**Opción A: MySQL Local**
+**Opción A: XAMPP (Recomendado)**
+Si tienes XAMPP instalado:
+1. Inicia Apache y MySQL desde XAMPP Control Panel
+2. Ve a phpMyAdmin: http://localhost/phpmyadmin
+3. Crea la base de datos `paseos_auth`
+4. Ejecuta el script SQL:
+```powershell
+mysql -u root paseos_auth < servicios/mysql-setup.sql
+```
+
+**Opción B: MySQL Local**
 Si tienes MySQL instalado localmente:
 ```sql
 CREATE DATABASE paseos_auth;
@@ -26,7 +36,7 @@ Luego ejecuta el script SQL:
 mysql -u root -p paseos_auth < servicios/mysql-setup.sql
 ```
 
-**Opción B: MySQL con Docker**
+**Opción C: MySQL con Docker**
 ```powershell
 docker run -d --name paseos-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=paseos_auth -p 3306:3306 mysql:8.0
 docker exec -i paseos-mysql mysql -uroot -proot paseos_auth < servicios/mysql-setup.sql

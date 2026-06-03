@@ -3,8 +3,8 @@
 
 Write-Host "Iniciando Paseos Felices (versión simplificada)..." -ForegroundColor Green
 
-# Configuración de variables de entorno
-$env:DATABASE_URL = "mysql+pymysql://root:root@localhost:3306/paseos_auth"
+# Configuración de variables de entorno (XAMPP MySQL)
+$env:DATABASE_URL = "mysql+pymysql://root:@localhost:3306/paseos_auth"
 $env:FRONTEND_URL = "http://localhost:3000"
 $env:SECRET_KEY = "tu_super_secreto_aqui_cambiar_en_produccion"
 $env:ENVIRONMENT = "development"
