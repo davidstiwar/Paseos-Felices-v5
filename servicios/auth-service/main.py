@@ -5,7 +5,7 @@ from fastapi.exceptions import RequestValidationError
 from core.config import settings
 from auth.router import router as auth_router
 from auth.database import engine, Base
-from common.observability.metrics import setup_metrics
+# from common.observability.metrics import setup_metrics  # Commented for Railway deployment
 
 # Import models so Base knows about them
 from auth import models  # noqa: F401
@@ -35,7 +35,7 @@ app.add_middleware(
 )
 
 # Prometheus metrics
-setup_metrics(app)
+# setup_metrics(app)  # Commented for Railway deployment
 
 # Manejador para errores de validación de Pydantic
 @app.exception_handler(RequestValidationError)
