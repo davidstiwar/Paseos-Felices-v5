@@ -1,6 +1,0 @@
-# Railway configuration for Paseos Felices
-# Railway will automatically detect and use docker-compose.yml
-
-[service]
-name = "Paseos Felices"
-

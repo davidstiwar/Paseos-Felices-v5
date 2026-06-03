@@ -27,7 +27,9 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://localhost:3001",
         "http://127.0.0.1:3001",
-        "https://paseos-felices-v5.vercel.app"
+        "https://paseos-felices-v5.vercel.app",
+        "*ngrok-free.app",
+        "*ngrok.io"
     ],
     allow_credentials=False,
     allow_methods=["*"],
@@ -35,7 +37,7 @@ app.add_middleware(
 )
 
 # Prometheus metrics
-# setup_metrics(app)  # Commented for Railway deployment
+setup_metrics(app)
 
 # Manejador para errores de validación de Pydantic
 @app.exception_handler(RequestValidationError)
