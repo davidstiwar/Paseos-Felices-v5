@@ -21,9 +21,12 @@ Si tienes XAMPP instalado:
 1. Inicia Apache y MySQL desde XAMPP Control Panel
 2. Ve a phpMyAdmin: http://localhost/phpmyadmin
 3. Crea la base de datos `paseos_auth`
-4. Ejecuta el script SQL:
+4. En phpMyAdmin, selecciona la base de datos `paseos_auth` y haz clic en "Importar"
+5. Selecciona el archivo `servicios/mysql-setup.sql` y haz clic en "Importar"
+
+O desde línea de comandos:
 ```powershell
-Get-Content servicios/mysql-setup.sql | mysql -u root paseos_auth
+& "C:\xampp\mysql\bin\mysql.exe" -u root paseos_auth < servicios/mysql-setup.sql
 ```
 
 **Opción B: MySQL Local**
