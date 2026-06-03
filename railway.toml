@@ -1,10 +1,6 @@
-[build]
-builder = "DOCKERFILE"
-dockerfilePath = "servicios/Dockerfile"
+# Railway configuration for Paseos Felices
+# Railway will automatically detect and use docker-compose.yml
 
-[deploy]
-startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
-healthcheckPath = "/health"
-healthcheckTimeout = 100
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 10
+[service]
+name = "Paseos Felices"
+
