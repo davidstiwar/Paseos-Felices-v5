@@ -23,7 +23,7 @@ $services = @(
     @{ Name = "storage-service"; Port = 3017 },
     @{ Name = "email-service"; Port = 3018 },
     @{ Name = "search-service"; Port = 3019 },
-    @{ Name = "reporting-service"; Port = 3020 }
+    @{ Name = "reporting-service"; Port = 3021 }
 )
 
 Write-Host "Iniciando $($services.Count) microservicios..." -ForegroundColor Yellow

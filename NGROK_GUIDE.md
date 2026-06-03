@@ -102,7 +102,7 @@ $env:FRONTEND_URL = "https://xxxx-xx-xx-xx-xx.ngrok-free.app"
 - Storage: `localhost:3017`
 - Email: `localhost:3018`
 - Search: `localhost:3019`
-- Reporting: `localhost:3020`
+- Reporting: `localhost:3021`
 
 ## Actualizar Frontend
 
