@@ -273,8 +273,8 @@ CREATE TABLE IF NOT EXISTS services (
     CONSTRAINT chk_duration CHECK (duration_minutes > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insertar servicios por defecto
-INSERT INTO services (name, description, base_price, duration_minutes, category) VALUES
+-- Insertar servicios por defecto (ignorar si ya existen)
+INSERT IGNORE INTO services (name, description, base_price, duration_minutes, category) VALUES
 ('Paseo Premium', 'Paseo de 60 minutos con atención personalizada', 35.00, 60, 'paseo'),
 ('Paseo Estándar', 'Paseo de 30 minutos en grupo', 25.00, 30, 'paseo'),
 ('Grooming', 'Baño y corte completo', 45.00, 90, 'grooming'),
