@@ -36,6 +36,12 @@ foreach ($service in $services) {
     
     Push-Location "servicios/$serviceName"
     
+    # Copiar módulo common si no existe
+    if (-not (Test-Path "common")) {
+        Write-Host "  Copiando módulo common..." -ForegroundColor Gray
+        Copy-Item "..\common" -Destination "." -Recurse -Force
+    }
+    
     # Crear entorno virtual si no existe
     if (-not (Test-Path ".venv")) {
         Write-Host "  Creando entorno virtual..." -ForegroundColor Gray
