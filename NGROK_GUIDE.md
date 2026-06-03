@@ -7,65 +7,89 @@ ngrok es una herramienta que expone servicios locales a internet a través de t�
 - Probar webhooks y callbacks
 
 ## Requisitos Previos
-- Docker instalado (para MySQL)
+- MySQL local instalado y corriendo (o Docker si prefieres)
 - Python 3.11+ instalado
 - ngrok instalado (descargar desde https://ngrok.com/download)
 - Cuenta gratuita en ngrok
 
-## Pasos para Iniciar
+## Pasos para Iniciar (Versión Simplificada)
 
-### 1. Iniciar MySQL con Docker
+### 1. Configurar MySQL
+
+**Opción A: MySQL Local**
+Si tienes MySQL instalado localmente:
+```sql
+CREATE DATABASE paseos_auth;
+```
+Luego ejecuta el script SQL:
 ```powershell
-docker run -d --name paseos-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=paseos_auth -p 3306:3306 mysql:8.0
+mysql -u root -p paseos_auth < servicios/mysql-setup.sql
 ```
 
-### 2. Ejecutar Script SQL
+**Opción B: MySQL con Docker**
 ```powershell
+docker run -d --name paseos-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=paseos_auth -p 3306:3306 mysql:8.0
 docker exec -i paseos-mysql mysql -uroot -proot paseos_auth < servicios/mysql-setup.sql
 ```
 
-### 3. Iniciar Servicios
+### 2. Iniciar Servicios
 ```powershell
-.\start-with-ngrok.ps1
+.\start-services.ps1
 ```
 
 Este script:
-- Inicia MySQL con Docker
-- Ejecuta el script SQL
-- Inicia nginx como proxy inverso
+- Crea entornos virtuales automáticamente si no existen
+- Instala dependencias
 - Inicia todos los microservicios en sus puertos correspondientes
+- No requiere Docker ni nginx
 
-### 4. Iniciar ngrok
+### 3. Iniciar ngrok
+
+**Opción A: Un solo servicio**
 ```powershell
-ngrok http 80
+ngrok http 8000
+```
+Esto expondrá solo el auth-service.
+
+**Opción B: Múltiples servicios (ngrok Pro)**
+Crea un archivo `ngrok.yml`:
+```yaml
+tunnels:
+  auth:
+    addr: 8000
+    proto: http
+  services-catalog:
+    addr: 3014
+    proto: http
+  appointments:
+    addr: 3023
+    proto: http
+```
+Luego ejecuta:
+```powershell
+ngrok start --all
 ```
 
-Esto expondrá el puerto 80 (nginx) a internet a través de una URL como:
-`https://xxxx-xx-xx-xx-xx.ngrok-free.app`
-
-### 5. Actualizar FRONTEND_URL
-Copia la URL de ngrok y actualiza la variable de entorno `FRONTEND_URL` en cada servicio:
+### 4. Actualizar FRONTEND_URL
+Copia la URL de ngrok y actualiza la variable de entorno:
 ```powershell
 $env:FRONTEND_URL = "https://xxxx-xx-xx-xx-xx.ngrok-free.app"
 ```
 
-O actualízala en el archivo `.env` si usas variables de entorno.
+## Estructura de Puertos
 
-## Estructura de URLs con ngrok
-
-Con nginx como proxy inverso, las URLs serán:
-- Auth: `https://xxxx.ngrok-free.app/auth/`
-- Services Catalog: `https://xxxx.ngrok-free.app/services-catalog/`
-- Appointments: `https://xxxx.ngrok-free.app/appointments/`
-- Reviews: `https://xxxx.ngrok-free.app/reviews/`
-- Pets: `https://xxxx.ngrok-free.app/pets/`
-- Groomer: `https://xxxx.ngrok-free.app/groomer/`
-- User Profile: `https://xxxx.ngrok-free.app/user-profile/`
-- Notifications: `https://xxxx.ngrok-free.app/notifications/`
-- Storage: `https://xxxx.ngrok-free.app/storage/`
-- Email: `https://xxxx.ngrok-free.app/email/`
-- Search: `https://xxxx.ngrok-free.app/search/`
-- Reporting: `https://xxxx.ngrok-free.app/reporting/`
+- Auth: `localhost:8000`
+- Services Catalog: `localhost:3014`
+- Appointments: `localhost:3023`
+- Reviews: `localhost:3007`
+- Pets: `localhost:3022`
+- Groomer: `localhost:3010`
+- User Profile: `localhost:3015`
+- Notifications: `localhost:3016`
+- Storage: `localhost:3017`
+- Email: `localhost:3018`
+- Search: `localhost:3019`
+- Reporting: `localhost:3020`
 
 ## Actualizar Frontend
 
@@ -73,27 +97,23 @@ Actualiza las URLs en tu frontend React para usar las URLs de ngrok:
 
 ```javascript
 const API_BASE_URL = 'https://xxxx.ngrok-free.app';
+// O para desarrollo local:
+const API_BASE_URL = 'http://localhost:8000';
 ```
 
 ## Detener Servicios
 
-Para detener todo:
-1. Detén ngrok (Ctrl+C)
-2. Detén nginx:
+Presiona cualquier tecla en la terminal donde ejecutaste `start-services.ps1` para detener todos los servicios automáticamente.
+
+O manualmente:
 ```powershell
-nginx -s stop
-```
-3. Detén los servicios de Python (Ctrl+C en cada terminal)
-4. Detén MySQL:
-```powershell
-docker stop paseos-mysql
-docker rm paseos-mysql
+Get-Process python | Stop-Process -Force
 ```
 
 ## Solución de Problemas
 
 ### Error: "Address already in use"
-Un puerto ya está en uso. Verifica qué proceso está usando el puerto y deténlo:
+Un puerto ya está en uso. Verifica qué proceso está usando el puerto:
 ```powershell
 netstat -ano | findstr :8000
 ```
@@ -101,6 +121,10 @@ netstat -ano | findstr :8000
 ### Error: "Connection refused"
 Asegúrate de que MySQL esté corriendo:
 ```powershell
+# MySQL local
+mysql -u root -p -e "SELECT 1"
+
+# Docker
 docker ps
 ```
 
@@ -120,3 +144,4 @@ Los servicios ya están configurados para aceptar URLs de ngrok (`*ngrok-free.ap
 - El plan gratuito de ngrok tiene limitaciones de tiempo y conexiones
 - Para producción, usa Railway, Render, u otro servicio de hosting
 - ngrok es ideal para desarrollo y pruebas, no para producción
+- El script `start-services.ps1` crea entornos virtuales automáticamente
